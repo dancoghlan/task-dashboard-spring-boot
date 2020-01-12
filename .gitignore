@@ -1,0 +1,9 @@
+*.iml
+.idea/
+jar/target/
+**/target
+.project
+.classpath
+.settings
+**/*.*.db
+logs/

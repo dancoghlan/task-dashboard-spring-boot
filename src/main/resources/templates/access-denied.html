@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Add Task</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+
+<div th:replace="fragments/header :: header"/>
+
+<body>
+<div class="container my-2">
+    <h1>HTTP Status 403 - Access is denied</h1>
+    <p>User [[${#httpServletRequest.remoteUser}]] does not has required access to this page.</p>
+    <p><a href="/" th:href="@{/app/home}">Back to home page</a></p>
+</div>
+</body>
+
+</html>

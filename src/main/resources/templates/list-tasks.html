@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>View Tasks</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+
+<div th:replace="fragments/header :: header"/>
+
+<body>
+<div class="container my-2">
+    <h3>My Tasks</h3>
+    <div class="card">
+        <div class="card-body">
+            <div th:switch="${tasks}" class="container my-5">
+                <p class="my-5">
+                    <a th:href="@{/app/task/add}" th:method="post" class="btn btn-primary"><i class="far fa-calendar-plus ml-2"> Add Task</i></a>
+                </p>
+                <div class="col-md-10">
+                    <h2 th:case="null">No Tasks Added</h2>
+                    <div th:case="*">
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Completed</th>
+                                <th>User</th>
+                                <th>Created At</th>
+                                <th>Last Updated</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="task : ${tasks}">
+                                <td th:text="${task.name}"></td>
+                                <td th:text="${task.description}"></td>
+                                <td><input type="checkbox" onclick="return false" th:checked="${task.completed}"/></td>
+                                <td th:text="${task.user.username}"></td>
+                                <td th:text="${#temporals.format(task.createdDateTime, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td th:text="${#temporals.format(task.updatedDateTime, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td><a th:href="@{/app/task/update/{id}(id=${task.id})}" class="btn btn-primary"><i class="fas fa-edit ml-2 text-center" data-toggle="tooltip" name="Edit"></i></a></td>
+                                <td><a th:href="@{/app/task/delete/{id}(id=${task.id})}" class="btn btn-primary"><i class="fas fa-trash-alt ml-2 text-center" data-toggle="tooltip" name="Delete"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
