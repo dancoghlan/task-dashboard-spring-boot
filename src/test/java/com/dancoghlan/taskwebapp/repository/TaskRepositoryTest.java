@@ -33,4 +33,14 @@ public class TaskRepositoryTest {
         Assert.assertEquals(2, results.size());
     }
 
+    @Test
+    public void test_findAll_invalid_user() {
+        // Given
+        long userId = 3;
+        // When
+        List<Task> results = taskRepository.findAllByUserId(userId);
+        // Then
+        Assert.assertEquals(0, results.size());
+    }
+
 }

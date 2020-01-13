@@ -5,9 +5,9 @@ Build the WAR file using the following Maven command:
 mvn clean package
 
 The default homepage URL is:
-http://localhost:8080/task-service/app/home
+http://localhost:8080/task-webapp/app/home
 
-(or whatever port your Tomcat instance is runnin on)
+(or whatever port your Tomcat instance is running on)
 
 ## Login Credentials
 Use the following credentials to log into the app:
