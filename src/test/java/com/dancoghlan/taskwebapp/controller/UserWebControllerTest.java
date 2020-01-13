@@ -68,14 +68,6 @@ public class UserWebControllerTest {
                 .andExpect(redirectedUrlPattern("**/app/login"));
     }
 
-    @Ignore
-    @Test
-    @WithMockCustomUser
-    public void test_delete_page_accessible_when_user_logged_in() throws Exception {
-        this.mockMvc.perform(post("/app/user/delete"))
-                .andExpect(status().isOk());
-    }
-
     @Test
     @WithAnonymousUser
     public void test_update_page_user_not_accessible_to_anon_user() throws Exception {
@@ -84,22 +76,4 @@ public class UserWebControllerTest {
                 .andExpect(redirectedUrlPattern("**/app/login"));
     }
 
-    @Ignore
-    @Test
-    @WithMockCustomUser
-    public void test_update_page_accessible_when_user_logged_in() throws Exception {
-        this.mockMvc.perform(post("/app/user/update"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("list-users"));
-    }
-
-    @Ignore
-    @Test
-    @WithMockCustomUser
-    public void test_add_user_post() throws Exception {
-        this.mockMvc.perform(post("/app/user/add"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/app/user/list"));
-    }
-    
 }
