@@ -1,6 +1,7 @@
 package com.dancoghlan.taskwebapp.service;
 
 import com.dancoghlan.taskwebapp.entity.Role;
+import com.dancoghlan.taskwebapp.entity.Task;
 import com.dancoghlan.taskwebapp.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,7 +37,7 @@ public class UserServiceImplTest {
         UserDetails userDetails = userService.loadUserByUsername(username);
         // Then
         User userResult = new User(userDetails);
-        compareUser(userResult, username, user.getRoles());
+        compareUser(userResult, username, user.getRoles(), null);
     }
 
     @Test
@@ -57,7 +60,7 @@ public class UserServiceImplTest {
         userService.add(user);
         // Then
         User result = userService.getByUsername(username);
-        compareUser(user, username, roles);
+        compareUser(user, username, roles, null);
     }
 
     @Test (expected = DataIntegrityViolationException.class)
@@ -116,11 +119,13 @@ public class UserServiceImplTest {
         Assert.assertFalse(userService.getById(addedUserId).isPresent());
     }
 
-    private void compareUser(User user, String username, List<Role> roles) {
+    private void compareUser(User user, String username, List<Role> roles, List<Task> tasks) {
         Assert.assertNotNull(user);
         Assert.assertEquals(username, user.getUsername());
         Assert.assertNotNull(user.getPassword());
-        Assert.assertEquals(roles, user.getRoles());
+        Assert.assertEquals(roles.stream().map(Role::getName).collect(toList()),
+                user.getRoles().stream().map(Role::getName).collect(toList()));
+        Assert.assertEquals(tasks, user.getTasks());
     }
 
 }

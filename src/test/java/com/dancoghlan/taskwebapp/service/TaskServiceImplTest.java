@@ -37,7 +37,7 @@ public class TaskServiceImplTest {
         // Then
         Optional<Task> result = taskService.getById(addedTask.getId());
         Assert.assertTrue(result.isPresent());
-        doAssertions(result.get(), name, description, false);
+        doAssertions(result.get(), name, description, false, user);
     }
 
     @Test
@@ -90,11 +90,12 @@ public class TaskServiceImplTest {
     }
 
 
-    private void doAssertions(Task task, String name, String description, boolean completed) {
+    private void doAssertions(Task task, String name, String description, boolean completed, User user) {
         Assert.assertNotNull(task);
         Assert.assertEquals(name, task.getName());
         Assert.assertEquals(description, task.getDescription());
         Assert.assertEquals(completed, task.isCompleted());
+        Assert.assertEquals(user.getId(), task.getUser().getId());
     }
 
 }

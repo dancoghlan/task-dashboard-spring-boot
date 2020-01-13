@@ -5,10 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class TodoListServiceApplication implements CommandLineRunner {
+public class TodoListServiceApplication  extends SpringBootServletInitializer implements CommandLineRunner {
     public static final Logger logger = LoggerFactory.getLogger(TodoListServiceApplication.class);
 
     public static void main(String[] args) {
